@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クリニカルポケット</title>
+    <title>さっぺい臨床ツール</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Noto Sans JP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -52,9 +52,19 @@
             display: flex;
             width: fit-content; /* 中身に合わせて幅を確保 */
         }
+
+        /* グラデーションアニメーション */
+        @keyframes gradient-x {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .animate-gradient-x {
+            background-size: 200% 200%;
+            animation: gradient-x 6s ease infinite;
+        }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-700 selection:bg-pink-100 selection:text-pink-600">
+<body class="bg-slate-100 text-slate-700 selection:bg-blue-100 selection:text-blue-700">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -206,32 +216,54 @@
                         
                         {/* ヘッダーエリア */}
                         <div className="flex justify-center py-4">
-                            <div className="bg-white px-8 py-6 rounded-3xl shadow-sm border-2 border-slate-200 flex flex-col items-center relative w-full">
+                            <div className="bg-white px-8 py-8 rounded-3xl shadow-sm border-2 border-slate-200 flex flex-col items-center relative w-full overflow-hidden">
                                 
-                                {/* Produced by タグ */}
-                                <div className="absolute -top-3 bg-slate-800 text-white text-[10px] font-bold px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm cursor-default border-2 border-white">
-                                    <span className="uppercase tracking-wider text-slate-300">Produced by</span>
-                                    <span>Sappei</span>
-                                    <span className="text-sm -mt-0.5">🐨</span>
+                                {/* Produced by タグ (右上) */}
+                                <div className="absolute top-0 right-0 bg-slate-100 rounded-bl-xl border-l border-b border-slate-200 px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
+                                    <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">Prod. by Sappei</span>
+                                    <span className="text-xs">🐨</span>
                                 </div>
 
-                                <div className="flex items-center gap-4 mt-2">
-                                    {/* 新ロゴアイコン: ポケット＋十字 */}
-                                    <div className="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center text-pink-600 logo-heartbeat border-2 border-pink-200 flex-shrink-0">
-                                        <NewClinicalIcon className="w-9 h-9" />
-                                    </div>
-                                    
-                                    {/* タイトル */}
-                                    <div className="flex flex-col">
-                                        <div className="flex justify-between w-full text-pink-600 font-bold text-lg leading-none px-0.5 tracking-wider">
-                                            <span>ク</span><span>リ</span><span>ニ</span><span>カ</span><span>ル</span>
+                                <div className="mt-2 mb-4 w-full relative">
+                                    {/* 背景の光彩効果 */}
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-gradient-to-r from-blue-100 to-indigo-100 blur-3xl opacity-60 rounded-full pointer-events-none"></div>
+
+                                    {/* タイトルエリア */}
+                                    <div className="relative flex flex-col items-center z-10">
+                                        
+                                        {/* 上部装飾ラベル */}
+                                        <div className="flex items-center gap-3 mb-2 opacity-60">
+                                            <div className="h-px w-8 bg-gradient-to-r from-transparent to-slate-400"></div>
+                                            <span className="text-[10px] font-bold tracking-[0.3em] text-slate-500 uppercase">Sappei presents</span>
+                                            <div className="h-px w-8 bg-gradient-to-l from-transparent to-slate-400"></div>
                                         </div>
-                                        <span className="text-slate-800 font-black text-3xl leading-none tracking-tight mt-1">ポケット</span>
+
+                                        {/* メインタイトル */}
+                                        <h1 className="relative text-3xl md:text-4xl font-black tracking-tight text-center py-1">
+                                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-700 via-slate-900 to-slate-700 animate-gradient-x drop-shadow-sm">
+                                                さっぺい臨床ツール
+                                            </span>
+                                            {/* 先進的なアクセントドット（脈打つ光） */}
+                                            <span className="absolute -top-1 -right-2 flex h-2.5 w-2.5">
+                                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500 border-2 border-white"></span>
+                                            </span>
+                                        </h1>
+
+                                        {/* 下部サブタイトル */}
+                                        <div className="mt-2 inline-flex items-center gap-2 px-4 py-1 rounded-full bg-slate-50 border border-slate-100 shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                            <p className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">
+                                                Advanced Medical Utilities
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* お知らせエリア（電光掲示板風・無限ループ） */}
-                                <div className="w-full bg-slate-100 rounded-lg overflow-hidden py-1.5 border border-slate-200 mt-5">
+                                <div className="w-full bg-slate-50 rounded-lg overflow-hidden py-2 border border-slate-200 mt-4 relative">
+                                    <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-50 to-transparent z-10"></div>
+                                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-50 to-transparent z-10"></div>
                                     <div className="animate-marquee">
                                         {/* セット1 */}
                                         <div className="flex items-center gap-16 px-8 whitespace-nowrap text-xs font-bold text-slate-500">
@@ -305,6 +337,8 @@
                 };
 
                 if (urls[screen]) {
+                    // プレビュー環境では新しいタブで開くことを推奨しますが、
+                    // 元のコードの挙動を再現しています。
                     window.location.href = urls[screen];
                 }
             };
